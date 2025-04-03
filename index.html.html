@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 Sensor Dashboard</title>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    #hitCount { font-size: 24px; color: #0066cc; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>ESP32 Sensor Data</h1>
+  <p>Hit Count: <span id="hitCount">0</span></p>
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBeuC9_57pRZy3zpC3IUJo90ix8HLUQLsE",
+        authDomain: "feline-funhub.firebaseapp.com",
+        databaseURL: "https://feline-funhub-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "feline-funhub",
+        storageBucket: "feline-funhub.firebasestorage.app",
+        messagingSenderId: "263188667553",
+        appId: "1:263188667553:web:75ca6c66aea0abd02224e0",
+        measurementId: "G-H319SCEQ65"
+      };
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    database.ref('sensor/hitCount').on('value', (snapshot) => {
+      document.getElementById('hitCount').textContent = snapshot.val();
+    });
+  </script>
+</body>
+</html>
